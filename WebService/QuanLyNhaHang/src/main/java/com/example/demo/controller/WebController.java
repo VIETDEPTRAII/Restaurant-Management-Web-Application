@@ -32,6 +32,7 @@ public class WebController {
 	LoaiNguyenLieuService repositoryLoaiNguyenLieu;
 	@Autowired
 	NguyenLieuService repositoryNguyenLieu;
+	
 	/////////////////////////////// LOAI NGUYEN LIEU///////////////
 	@RequestMapping(path = "/get_list_loainguyenlieu", produces = MediaType.APPLICATION_JSON_VALUE)
 	public java.util.List<LoaiNguyenLieu> getAllLoaiMonAn() {
@@ -50,7 +51,7 @@ public class WebController {
 	}
 
 	// lay 1 loai nguyen lieu
-	@RequestMapping(value = "/LoaiNguyenLieu/{LOAINGUYENLIEU_ID}", method = RequestMethod.GET)
+	@RequestMapping(value = "/LoaiNguyenLieu/{id}", method = RequestMethod.GET)
 
 	public LoaiNguyenLieu findLoaiNguyenLieuByID(@PathVariable("id") long id) {
 		   LoaiNguyenLieu loainguyenlieu = repositoryLoaiNguyenLieu.getOne(id);
@@ -61,8 +62,8 @@ public class WebController {
 	}
 	
 	//update loai nguyen lieu
-	@RequestMapping(value = "/LoaiNguyenLieu/", 
-			method = RequestMethod.PUT)
+	@RequestMapping(value = "/UpdateLoaiNguyenLieu/", 
+			method = RequestMethod.POST)
 	public ResponseEntity<LoaiNguyenLieu> updateLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieuForm) {
 		LoaiNguyenLieu lnl = repositoryLoaiNguyenLieu.getOne(loainguyenlieuForm.getId());
 	    if(lnl == null) {
@@ -75,28 +76,32 @@ public class WebController {
 	    return ResponseEntity.ok(updatedLoaiNguyenLieu);
 	}
   //xóa loai nguyen lieu
-	@RequestMapping(value = "/LoaiNguyenLieu/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<LoaiNguyenLieu> deleteLoaiNguyenLieu(@PathVariable(value = "id") Long id) {
-		LoaiNguyenLieu lnl = repositoryLoaiNguyenLieu.getOne(id);
+	@RequestMapping(value = "/DeleteLoaiNguyenLieu", method = RequestMethod.POST)
+	public int deleteLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieu) {
+		//@PathVariable(value=""): lay bien tu url
+		//@RequestBody: lay object duoc gui trong body
+		LoaiNguyenLieu lnl = repositoryLoaiNguyenLieu.getOne(loainguyenlieu.getId());
 	    if(lnl == null) {
-	        return ResponseEntity.notFound().build();
+	        return 0;
 	    }
 	    repositoryLoaiNguyenLieu.delete(lnl);//delete trong database
-	    return ResponseEntity.ok().build();
+	    return 1;
 	}
 	//Them loai nguyen lieu
 	@RequestMapping(
-			value = "/LoaiNguyenLieu/", 
+			value = "/InsertLoaiNguyenLieu/", 
 			method = RequestMethod.POST
+			
 			)
 	@ResponseBody
 	public LoaiNguyenLieu insertLoaiNguyenLieu(@Valid @RequestBody LoaiNguyenLieu loainguyenlieuForm) {
+		//@Valid: kiem tra xem co ton tai object trong body
 		LoaiNguyenLieu lnl=repositoryLoaiNguyenLieu.save(loainguyenlieuForm);
 		return lnl;
 	}
 	
 	
-/////////////////////////////// NGUYEN LIEU///////////////
+/////////////////////////////// NGUYEN LIEU/ //////////////
 	
 	@RequestMapping(path = "/GetAllNguyenLieu", produces = MediaType.APPLICATION_JSON_VALUE)
 	public java.util.List<NguyenLieu> getAllNguyenLieu() {
@@ -106,7 +111,7 @@ public class WebController {
 
 	
 
-	// lay 1 loai nguyen lieu
+	// lay 1  nguyen lieu
 	@RequestMapping(value = "/NguyenLieu/{id}", method = RequestMethod.GET)
 
 	public NguyenLieu findNguyenLieuByID(@PathVariable("id") long id) {
@@ -118,22 +123,25 @@ public class WebController {
 	}
 	
 	//update  nguyen lieu
-	@RequestMapping(value = "/NguyenLieu/", 
-			method = RequestMethod.PUT)
+	@RequestMapping(value = "/UpdateNguyenLieu", 
+			method = RequestMethod.POST)
 	public ResponseEntity<NguyenLieu> updateNguyenLieu(@Valid @RequestBody NguyenLieu nguyenlieuForm) {
 		NguyenLieu nl = repositoryNguyenLieu.getOne(nguyenlieuForm.getNGUYENLIEU_ID());
 	    if(nl == null) {
 	        return ResponseEntity.notFound().build();
 	    }
+	    
 	    nl.setNGUYENLIEU_NAME(nguyenlieuForm.getNGUYENLIEU_NAME());
 	    nl.setNGUYENLIEU_PRICE(nguyenlieuForm.getNGUYENLIEU_PRICE());
-
+        nl.setNGUYENLIEU_DATE(nguyenlieuForm.getNGUYENLIEU_DATE());
+       
 	    NguyenLieu updatedNguyenLieu = repositoryNguyenLieu.save(nl);//update trong database
 	    return ResponseEntity.ok(updatedNguyenLieu);
 	}
-  //xóa loai nguyen lieu
+  //xóa nguyen lieu
+	//cach 1
 	@RequestMapping(value = "/NguyenLieu/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<NguyenLieu> deleteNguyenLieu(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<NguyenLieu> deleteNguyenLieu1(@PathVariable(value = "id") Long id) {
 		NguyenLieu nl = repositoryNguyenLieu.getOne(id);
 	    if(nl == null) {
 	        return ResponseEntity.notFound().build();
@@ -141,9 +149,20 @@ public class WebController {
 	    repositoryNguyenLieu.delete(nl);//delete trong database
 	    return ResponseEntity.ok().build();
 	}
-	//Them loai nguyen lieu
+	
+	//cach 2
+	@RequestMapping(value = "/DeleteNguyenLieu", method = RequestMethod.POST)
+	public int deleteNguyenLieu(@Valid @RequestBody  NguyenLieu nguyeLieu) {
+		NguyenLieu nl = repositoryNguyenLieu.getOne(nguyeLieu.getNGUYENLIEU_ID());
+	    if(nl == null) {
+	        return 0;
+	    }
+	    repositoryNguyenLieu.delete(nl);//delete trong database
+	    return 1;
+	}
+	//Them nguyen lieu
 	@RequestMapping(
-			value = "/NguyenLieu/", 
+			value = "/InsertNguyenLieu", 
 			method = RequestMethod.POST
 			)
 	@ResponseBody

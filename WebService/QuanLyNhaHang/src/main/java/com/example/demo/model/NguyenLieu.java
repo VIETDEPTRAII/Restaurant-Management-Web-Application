@@ -17,10 +17,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "nguyenlieu")
 public class NguyenLieu implements Serializable {
 
-
-private static final long serialVersionUID = -3009157732242241606L;
+//-3009157732242241606L??
+private static final long serialVersionUID = 1L;
  @Id
- @GeneratedValue(strategy = GenerationType.AUTO)
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
  @Column(name = "NGUYENLIEU_ID")
  private long    NGUYENLIEU_ID;
 

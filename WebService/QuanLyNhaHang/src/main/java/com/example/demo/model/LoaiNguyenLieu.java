@@ -17,11 +17,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class LoaiNguyenLieu implements Serializable {
 
  public long getId() {
-		return LOAINGUYENLIEU_ID;
+		return id;
 	}
 
 	public void setId(long id) {
-		this.LOAINGUYENLIEU_ID = id;
+		this.id = id;
 	}
 
 	public String getLOAINGUYENLIEU_NAME() {
@@ -40,11 +40,11 @@ public class LoaiNguyenLieu implements Serializable {
 		LOAINGUYENLIEU_UNIT = lOAINGUYENLIEU_UNIT;
 	}
 
-private static final long serialVersionUID = -3009157732242241606L;
+private static final long serialVersionUID = 1L;
  @Id
- @GeneratedValue(strategy = GenerationType.AUTO)
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
  @Column(name = "LOAINGUYENLIEU_ID")
- private long LOAINGUYENLIEU_ID;
+ private long id;
 
  @Column(name = "LOAINGUYENLIEU_NAME")
  private String LOAINGUYENLIEU_NAME;
@@ -53,10 +53,10 @@ private static final long serialVersionUID = -3009157732242241606L;
  private String LOAINGUYENLIEU_UNIT;
 
  protected LoaiNguyenLieu() {
+	  
  }
 
  public LoaiNguyenLieu(String LoaiNguyenLieuName, String LoaiNguyenLieuDVT) {
-
    this.LOAINGUYENLIEU_NAME = LoaiNguyenLieuName;
    this.LOAINGUYENLIEU_UNIT = LoaiNguyenLieuDVT;
  }
