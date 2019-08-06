@@ -68,7 +68,7 @@ app.controller('ResourcesCtrl', function($scope, $http) {
                         NGUYENLIEU_NAME: $scope.inputName,
                         NGUYENLIEU_PRICE: $scope.inputPrice,
                         lOAINGUYENLIEU_LOAINGUYENLIEU_ID: $scope.TypeId,
-
+                        NGUYENLIEU_DATE: '2019/09/01'
                     });
 
             $http.post("http://localhost:8080/api/InsertNguyenLieu/",data)
@@ -83,6 +83,7 @@ app.controller('ResourcesCtrl', function($scope, $http) {
       url : "http://localhost:8080/api/NguyenLieu/" + resources.nguyenlieu_ID
     }).then(function mySuccess(response) {
         $scope.resourcesDetails = response.data;
+
       });
 
   };
