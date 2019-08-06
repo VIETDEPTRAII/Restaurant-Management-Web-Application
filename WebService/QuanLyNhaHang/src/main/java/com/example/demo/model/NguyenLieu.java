@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -36,7 +37,20 @@ private static final long serialVersionUID = 1L;
  @Column(name = "LOAINGUYENLIEU_LOAINGUYENLIEU_ID")
  private int LOAINGUYENLIEU_LOAINGUYENLIEU_ID;
 
- protected NguyenLieu() {
+ //Ten loai nguyen lieu
+ 
+ private String TENLOAI_NGUYENLIEU;
+ 
+
+public String getTENLOAI_NGUYENLIEU() {
+	return TENLOAI_NGUYENLIEU;
+}
+
+public void setTENLOAI_NGUYENLIEU(String tENLOAI_NGUYENLIEU) {
+	TENLOAI_NGUYENLIEU = tENLOAI_NGUYENLIEU;
+}
+
+protected NguyenLieu() {
 	 
  }
 
@@ -88,5 +102,7 @@ public int getLOAINGUYENLIEU_LOAINGUYENLIEU_ID() {
 public void setLOAINGUYENLIEU_LOAINGUYENLIEU_ID(int lOAINGUYENLIEU_LOAINGUYENLIEU_ID) {
 	LOAINGUYENLIEU_LOAINGUYENLIEU_ID = lOAINGUYENLIEU_LOAINGUYENLIEU_ID;
 }
+
+
 
 }
