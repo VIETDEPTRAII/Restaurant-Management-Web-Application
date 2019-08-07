@@ -176,8 +176,8 @@
             <th scope="col"></th>
             </tr>
           </thead>
-          <tbody>
-            <tr ng-repeat="x in resources" data-toggle="collapse" data-target="#accordion" class="clickable" ng-click="getResourcesIndex(x)">
+          <tbody ng-repeat="x in resources">
+            <tr  data-toggle="collapse" data-target="#a{{x.nguyenlieu_ID}}" class="clickable" ng-click="getResourcesIndex(x)">
               <th scope="row">
                 <div class="media align-items-center">
                   <a href="#" class="avatar rounded-circle mr-3">
@@ -193,7 +193,7 @@
               </td>
               <td ng-model="resourcesTypeId">
                   <span  class="badge badge-dot" >
-                    {{x.tenloainguyenlieu}}
+                    {{x.tenloai_NGUYENLIEU}}
                   </span>
               </td>
               <td>
@@ -231,7 +231,7 @@
               </td>
             </tr>
             <tr>
-              <td ng-model="resourcesDetails" colspan="8" id="accordion" class="collapse">
+              <td  ng-model="resourcesDetails" colspan="8" id="a{{x.nguyenlieu_ID}}" class="collapse">
                 <div class="container">
                   <div class="row">
                     <div class="card-body border">

@@ -14,7 +14,7 @@ app.config(function($routeProvider) {
 });
 
 app.controller('ResourcesCtrl', function($scope, $http) {
-  $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
   $scope.resources = [
                 //{ Id: "SP000016", Name: "Lemon", type: "Water", price:"14.000", costprice:"8.000", inventory:"30" },
                 //{ Id: "SP000017", Name: "Lemon", type: "Water", price:"14.000", costprice:"8.000", inventory:"30" },
