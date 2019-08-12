@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Service.LoaiNguyenLieuService;
 import com.example.demo.Service.NguyenLieuService;
+import com.example.demo.Service.BanService;
 import com.example.demo.Service.LoaiMonAnService;
 import com.example.demo.Service.MonAnService;
 
 
 import com.example.demo.model.LoaiNguyenLieu;
 import com.example.demo.model.NguyenLieu;
+import com.example.demo.model.Ban;
 import com.example.demo.model.LoaiMonAn;
 import com.example.demo.model.MonAn;
 
@@ -368,14 +370,79 @@ public class WebController {
 			
 		
 			
-			
+	///////////////////////QUAN LY BAN //////////////////////////////////
+	
+	@Autowired
+	BanService repositoryBan;
+	
+		//LAY ALL BAN
+		@RequestMapping(path = "/GetAllBan", produces = MediaType.APPLICATION_JSON_VALUE)
+		public java.util.List<Ban> GetAllBans() {
+			// This returns a JSON or XML with the users
+			return repositoryBan.GetAllBans();
+		}
+
 		
-			
-			
-			
-			
-			
-			
-			
+		// LAY 1 BAN
+		@RequestMapping(value = "/Ban/{id}", method = RequestMethod.GET)
+		public Ban FindBanByID(@PathVariable("id") long id) {
+			return repositoryBan.GetBan(id);
+		}
+		
+		//THEM BAN
+			@RequestMapping(
+					value = "/InsertBan", 
+					method = RequestMethod.POST,
+					produces = { MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+		            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+					)
+			@ResponseBody
+			public boolean InsertBan(Ban banForm) {
+				
+				try {
+					return repositoryBan.InsertBan(banForm);
+				}catch (Exception e) {
+					// TODO: handle exception
+					return false;
+				}
+				
+			}
+		
+		//CAP NHAT BAN
+		@RequestMapping(value = "/UpdateBan", 
+				method = RequestMethod.POST,
+				consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+		public boolean UpdateBan(@Valid Ban banForm) {
+			try {
+				return repositoryBan.UpdateBan(banForm);
+			}catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+		   
+		}
+		
+	     //XOA BAN
+		@RequestMapping(value = "/BAN/{id}", method = RequestMethod.POST)
+		public boolean DeleteBan(@PathVariable(value = "id") Long id) {
+			try {
+				return repositoryBan.DeleteBan(id);
+			}catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+		}
+		
+		//TIM KIEM
+		@RequestMapping(
+				value="/DANHSACHBAN",
+				method=RequestMethod.GET)
+		public String SearchBans(){
+		  String a=	(String) repositoryBan.DanhSachBan();
+		 return (a);
+		}
+		
+	
+								
 		
 }
