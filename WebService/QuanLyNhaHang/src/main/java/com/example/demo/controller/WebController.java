@@ -414,7 +414,7 @@ public class WebController {
 			value = "/UpdateStatusBan",
 		    method = RequestMethod.GET)
 	 public void UpdateStatusBan() { 
-		repositoryBan.CapNhatTrangThaiBan("a", "Bàn 1");
+		repositoryBan.CapNhatTrangThaiBan("aaa", "Bàn 1");
 	 }
 	 
 	
