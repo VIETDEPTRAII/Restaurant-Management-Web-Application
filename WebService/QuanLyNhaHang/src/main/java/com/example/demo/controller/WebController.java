@@ -420,12 +420,66 @@ public class WebController {
 	
 								
  ////////////////////////////QUAN LY HOA DON//////////////////////////////
+		
+		@Autowired
 		HoaDonService repositoryHoaDon;
-		//LAY ALL BAN
-	@RequestMapping(path = "/TaoHoaDon", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void TaoHoaDon() {
-		// This returns a JSON or XML with the users
-		repositoryHoaDon.TaoHoaDon((long) 1, "HD01");
 
-	}
+		// LAY ALL BAN
+		@RequestMapping(path = "/GetAllHoaDon", produces = MediaType.APPLICATION_JSON_VALUE)
+		public java.util.List<HoaDon> GetAllHoaDons() {
+			// This returns a JSON or XML with the users
+			return repositoryHoaDon.GetAllHoaDons();
+		}
+
+		// LAY 1 HoaDon
+		@RequestMapping(value = "/HoaDon/{id}", method = RequestMethod.GET)
+		public HoaDon FindHoaDonByID(@PathVariable("id") long id) {
+			return repositoryHoaDon.GetHoaDon(id);
+		}
+
+		// THEM HoaDon
+		@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST, produces = {
+				MediaType.APPLICATION_ATOM_XML_VALUE,
+				MediaType.APPLICATION_JSON_VALUE }, 
+				consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+		@ResponseBody
+		public boolean InsertBan(HoaDon hdForm) {
+
+			try {
+				return repositoryHoaDon.InsertHoaDon(hdForm);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+
+		}
+
+		// CAP NHAT HoaDon
+		@RequestMapping(value = "/UpdateHoaDon", 
+				method = RequestMethod.POST, 
+				consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+		public boolean UpdateHoaDon(@Valid HoaDon hdForm) {
+			try {
+				return repositoryHoaDon.UpdateHoaDon(hdForm);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+
+		}
+
+		// XOA HoaDon
+		@RequestMapping(value = "/HoaDon/{id}", 
+				method = RequestMethod.POST)
+		public boolean DeleteHoaDon(@PathVariable(value = "id") Long id) {
+			try {
+				return repositoryHoaDon.DeleteHoaDon(id);
+			} catch (Exception e) {
+				// TODO: handle exception
+				return false;
+			}
+		}
+
+	
+	
 }
