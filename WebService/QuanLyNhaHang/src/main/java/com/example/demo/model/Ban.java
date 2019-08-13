@@ -16,9 +16,12 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@NamedStoredProcedureQueries({
-	  @NamedStoredProcedureQuery(name = "firstProcedure", procedureName = "SP_GETALLBANS", resultClasses = Ban.class),
-})
+/*
+ * @NamedStoredProcedureQueries({
+ * 
+ * @NamedStoredProcedureQuery(name = "firstProcedure", procedureName =
+ * "SP_GETALLBANS", resultClasses = Ban.class), })
+ */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "ban")
 

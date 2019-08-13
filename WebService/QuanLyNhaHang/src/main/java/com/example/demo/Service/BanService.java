@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.boot.Banner;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
@@ -14,13 +15,22 @@ public interface BanService extends JpaRepository<Ban, Long>{
 
 	//SEARCH BAN SU DUNG QUERY 
 	@Query("FROM Ban WHERE BAN_NO LIKE %:keyword%")
-	public List<Ban> search(@Param("keyword") String keyword);
-	//SEARCH BAN SU DUNG CALL STORPROCEDURE
+	public List<Ban> SearchBans(@Param("keyword") String keyword);
+	//CAP NHAT TRANG THAI BAN
+	/*
+	 * @Modifying
+	 * 
+	 * @Query("update ban set BAN_STATUS = :status where BAN_NO = :name") int
+	 * CapNhatTrangThaiBan(@Param("status") String status,
+	 * 
+	 * @Param("name") String name);
+	 */
 	
-	 @Procedure(name = "firstProcedure") public String DanhSachBan();
+	//SEARCH BAN SU DUNG CALL STORPROCEDURE
+	/* @Procedure(name = "firstProcedure") public String DanhSachBan(); */
 	 
 	
-	//GET DNAH SACH BAN
+	//GET DANH SACH BAN
 	public default List<Ban> GetAllBans(){
 		return this.findAll();
 	}

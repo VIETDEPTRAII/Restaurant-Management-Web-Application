@@ -325,6 +325,9 @@ public class WebController {
 					)
 			@ResponseBody
 			public MonAn insertMonAn(MonAn monanForm) {
+				if(String.valueOf(monanForm.getLOAIMONAN_LOAIMONAN_ID())=="null") {
+					return null;
+				}
 				try 
 				{
 					return repositoryMonAn.save(monanForm);
@@ -434,14 +437,27 @@ public class WebController {
 		}
 		
 		//TIM KIEM
-		@RequestMapping(
-				value="/DANHSACHBAN",
-				method=RequestMethod.GET)
-		public String SearchBans(){
-		  String a=	(String) repositoryBan.DanhSachBan();
-		 return (a);
+		@RequestMapping(value = "/SearchBans/{key}", 
+				method = RequestMethod.GET)
+		public List<Ban> SearchBans(@PathVariable(value = "key") String key) {
+			try {
+				return repositoryBan.SearchBans(key);
+			}catch (Exception e) {
+				// TODO: handle exception
+				return null;
+			}
 		}
-		
+	/*
+	 * //CAP NHAT TRANG THAI BAN
+	 * 
+	 * @RequestMapping(value = "/UpdateStatusBan/", method = RequestMethod.POST,
+	 * consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE) public int
+	 * UpdateStatusBan(@Valid Ban banForm) { try { return
+	 * repositoryBan.CapNhatTrangThaiBan(banForm.getBAN_STATUS(),banForm.getBAN_NO()
+	 * ); }catch (Exception e) { // TODO: handle exception return 0; }
+	 * 
+	 * }
+	 */
 	
 								
 		
