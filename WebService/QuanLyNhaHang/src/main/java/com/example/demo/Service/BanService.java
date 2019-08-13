@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.boot.Banner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -29,7 +31,10 @@ public interface BanService extends JpaRepository<Ban, Long>{
 	//SEARCH BAN SU DUNG CALL STORPROCEDURE
 	/* @Procedure(name = "firstProcedure") public String DanhSachBan(); */
 	 
-	
+	    @Modifying
+	    @Query(value = "update ban set BAN_STATUS = :status where BAN_NO = :name", nativeQuery = true)
+	    @Transactional
+	   void CapNhatTrangThaiBan(@Param("status") String status,@Param("name") String name);
 	//GET DANH SACH BAN
 	public default List<Ban> GetAllBans(){
 		return this.findAll();
