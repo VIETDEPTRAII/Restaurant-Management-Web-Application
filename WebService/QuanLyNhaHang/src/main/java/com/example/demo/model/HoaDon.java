@@ -42,27 +42,28 @@ public class HoaDon implements Serializable {
 	private int BAN_BAN_ID;
 
 	@Column(name = "NHANVIEN_NHANVIEN_ID")
-	private int LOAIMONAN_LOAIMONAN_ID;
-	@Transient
-	private String TENLOAI_MONAN;
+	private int NHANVIEN_NHANVIEN_ID;
+	/*
+	 * @Transient private String TENLOAI_MONAN;
+	 */
 
 	// KHOI TAO
 	public HoaDon() {
-		super();
+		//super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public HoaDon(String hOADON_NO, Date hOADON_DATE, String hOADON_STATUS, String hOADON_TAX,
-			int kHACHHANG_KHACHHANG_ID, int bAN_BAN_ID, int lOAIMONAN_LOAIMONAN_ID, String tENLOAI_MONAN) {
-		super();
+			int kHACHHANG_KHACHHANG_ID, int bAN_BAN_ID, int nHANVIEN_ID) {
+		//super();
 		HOADON_NO = hOADON_NO;
 		HOADON_DATE = hOADON_DATE;
 		HOADON_STATUS = hOADON_STATUS;
 		HOADON_TAX = hOADON_TAX;
 		KHACHHANG_KHACHHANG_ID = kHACHHANG_KHACHHANG_ID;
 		BAN_BAN_ID = bAN_BAN_ID;
-		LOAIMONAN_LOAIMONAN_ID = lOAIMONAN_LOAIMONAN_ID;
-		TENLOAI_MONAN = tENLOAI_MONAN;
+		NHANVIEN_NHANVIEN_ID = nHANVIEN_ID;
+		
 	}
 	// GETTER
 
@@ -122,21 +123,15 @@ public class HoaDon implements Serializable {
 		BAN_BAN_ID = bAN_BAN_ID;
 	}
 
-	public int getLOAIMONAN_LOAIMONAN_ID() {
-		return LOAIMONAN_LOAIMONAN_ID;
+	public int getNHANVIEN_NHANVIEN_ID() {
+		return NHANVIEN_NHANVIEN_ID;
 	}
 
-	public void setLOAIMONAN_LOAIMONAN_ID(int lOAIMONAN_LOAIMONAN_ID) {
-		LOAIMONAN_LOAIMONAN_ID = lOAIMONAN_LOAIMONAN_ID;
+	public void setNHANVIEN_NHANVIEN_ID(int nHANVIEN_NHANVIEN_ID) {
+		NHANVIEN_NHANVIEN_ID = nHANVIEN_NHANVIEN_ID;
 	}
 
-	public String getTENLOAI_MONAN() {
-		return TENLOAI_MONAN;
-	}
-
-	public void setTENLOAI_MONAN(String tENLOAI_MONAN) {
-		TENLOAI_MONAN = tENLOAI_MONAN;
-	}
+	
 
 	// SETTER
 }

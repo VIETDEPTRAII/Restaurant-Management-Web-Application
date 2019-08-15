@@ -31,7 +31,8 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 		
 		//INSERT HoaDon
 		public default boolean InsertHoaDon(HoaDon o) {
-			if(o!=null) {
+			HoaDon kq=this.getOne(o.getHOADON_ID());
+			if(kq!=null) {
 				this.save(o);
 				return true;
 			}else {
@@ -44,7 +45,6 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 		public default boolean UpdateHoaDon(HoaDon o) {
 			HoaDon temp=this.getOne(o.getHOADON_ID());
 			if(temp!=null) {
-				
 				this.save(temp);
 				return true;
 			}else {

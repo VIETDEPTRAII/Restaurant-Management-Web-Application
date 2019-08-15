@@ -438,22 +438,27 @@ public class WebController {
 		}
 
 		// THEM HoaDon
-		@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST, produces = {
-				MediaType.APPLICATION_ATOM_XML_VALUE,
-				MediaType.APPLICATION_JSON_VALUE }, 
-				consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-		@ResponseBody
-		public boolean InsertBan(HoaDon hdForm) {
-
-			try {
-				return repositoryHoaDon.InsertHoaDon(hdForm);
-			} catch (Exception e) {
-				// TODO: handle exception
-				return false;
-			}
-
-		}
-
+	/*
+	 * @RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST,
+	 * produces = { MediaType.APPLICATION_ATOM_XML_VALUE,
+	 * MediaType.APPLICATION_JSON_VALUE }, consumes =
+	 * MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	 * 
+	 * @ResponseBody public boolean InsertBan(HoaDon hdForm) {
+	 * 
+	 * try { return repositoryHoaDon.InsertHoaDon(hdForm); } catch (Exception e) {
+	 * // TODO: handle exception return false; }
+	 * 
+	 * }
+	 */
+		@RequestMapping(value = "/InsertHoaDon", method = RequestMethod.POST
+				)
+				@ResponseBody
+				public boolean InserHoaDon(HoaDon hd) {
+					// @Valid: kiem tra xem co ton tai object trong body
+					return repositoryHoaDon.InsertHoaDon(hd);
+					
+				}
 		// CAP NHAT HoaDon
 		@RequestMapping(value = "/UpdateHoaDon", 
 				method = RequestMethod.POST, 
