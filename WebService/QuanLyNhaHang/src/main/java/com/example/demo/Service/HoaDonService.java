@@ -32,7 +32,7 @@ public interface HoaDonService extends JpaRepository<HoaDon,Long>{
 		//INSERT HoaDon
 		public default boolean InsertHoaDon(HoaDon o) {
 			HoaDon kq=this.getOne(o.getHOADON_ID());
-			if(kq!=null) {
+			if(kq==null) {
 				this.save(o);
 				return true;
 			}else {
